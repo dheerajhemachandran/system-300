@@ -1,5 +1,5 @@
 'use client'// pages/login.tsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -8,8 +8,10 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { useRouter } from "next/navigation";
+import { Auth } from "../context/AuthContext";
 
 export default function LoginPage() {
+  const {user}=Auth()
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLogin, setIsLogin] = useState<boolean>(true);
@@ -37,6 +39,12 @@ export default function LoginPage() {
       console.error("Google sign-in failed:", error);
     }
   };
+
+  useEffect(() => {
+    if(user)
+      router.push('/')
+  }, [user])
+  
 
   return (
     <div className="flex justify-center items-center min-h-[90vh]">
