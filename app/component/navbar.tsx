@@ -1,12 +1,10 @@
 'use client'
 import React from 'react'
-import { useAuth } from '../context/AuthContext';
+import { Auth } from '../context/AuthContext';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 const navbar = () => {
-  const { user } = useAuth();
-  const router = usePathname()
+  const { user } = Auth();
 
   return (
     <nav className='min-h-[10vh] flex justify-between items-end py-2'>

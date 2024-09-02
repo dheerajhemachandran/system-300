@@ -1,12 +1,12 @@
 'use client'
 import { useEffect, useState } from "react";
-import { useAuth } from "./context/AuthContext";
+import { Auth } from "./context/AuthContext";
 import { useRouter } from "next/navigation";
 import { createProfile, getTask, submitDailyTask } from "./utils/services";
 import CountdownTimer from "./component/countDown";
 
 export default function Home() {
-  const { user } = useAuth();
+  const { user } = Auth();
   const router = useRouter()
   const [tasks, settasks] = useState<any>(null)
   const [showpopup, setshowpopup] = useState(false)
@@ -116,7 +116,7 @@ export default function Home() {
         <div className="text-center text-xl mb-2">Are you sure you want to sumbit?</div>
         {tasks && tasks.tasks.map((task:any)=>{
           return (
-          <div className="flex justify-between px-4">
+          <div className="flex justify-between px-4" key={task.name}>
             <span className={`${!task.completed && 'line-through text-red-400'}`}>
               {task.name}
             </span>

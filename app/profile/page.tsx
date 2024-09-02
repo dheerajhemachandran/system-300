@@ -1,12 +1,12 @@
 'use client'
 import { useRouter } from "next/navigation";
-import { useAuth } from "../context/AuthContext";
+import { Auth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import { getProfile, updateReward } from "../utils/services";
 import { getAuth, signOut } from "firebase/auth";
 
 export default function ProfilePage() {
-  const { user } = useAuth();
+  const { user } = Auth();
   const router = useRouter()
   const [userInfo,setuserInfo] = useState<any>(null)
   const [stats,setstats] = useState<any>(null)
